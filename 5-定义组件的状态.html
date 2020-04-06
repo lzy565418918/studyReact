@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Inter extends React.Component{
+            constructor(props){
+                super(props)
+                // 自己定义的状态
+                this.state={
+                    num:0
+                }
+            }
+            add=()=>{
+                // 修改状态的方法,调用setState方法，return修改后的值
+                this.setState(state=>({ num:state.num+1}))
+            }
+            render(){
+                return (
+                    <div>
+                        <p>{this.state.num}</p>
+                        <input type="button" value="+1" onClick={this.add} />    
+                    </div>
+                )
+            }
+        }
+        const root = document.getElementById('root')
+        // render方法接收两个参数，第一个参数可以是一个jsx对象，也可以是一个react组件
+        // 第二个参数是一个元素dom对象，它作为显示内容的容器
+        ReactDOM.render(<Inter />,root)
+    </script>
+</body>
+
+</html>

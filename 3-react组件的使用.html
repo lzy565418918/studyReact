@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 用函数的方式定义一个组件
+    // function Welcome(props){
+    //     return <h1>Hello {props.name}!</h1>
+    // }
+
+
+
+
+    // 用类的方式定义一个组件
+    class Welcome extends React.Component{
+        render(){
+            // 返回一个jsx对象
+            return <h1>Hello {this.props.name}!</h1>
+        }
+    }
+    
+
+    // 定义一个大的组件，里面嵌入其他的组件
+    function App(props){
+        return (
+            <div>
+                <Welcome name="world" />
+                <Welcome name="qqq" />
+                <Welcome name="worlwwwd" />
+            </div>
+        )
+    }
+    ReactDOM.render(<App />,root)
+    </script>
+</body>
+
+</html>

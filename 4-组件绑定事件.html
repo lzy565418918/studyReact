@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 定义一个类
+        class HelloName extends React.Component{
+            // 定义jsx中要调用的方法
+            btn=()=>{
+                console.log('hello '+this.props.name+'!')
+            }
+            btn2=(name)=>{
+                console.log('hello'+name)
+            }
+            render(){
+                return (
+                    // 绑定事件直接卸载jsx结构的标签中，写成驼峰式
+                    // 事件调用的方法在组件中定义
+                    <div>
+                        <input type="button" value="按钮" onClick={this.btn}/> 
+                        {/* 传参写法，要使用匿名函数，如果直接写this.btn2('xxx')会直接调用 */}
+                        <input type="button" value="按钮" onClick={()=>{this.btn2('参数')}}/> 
+                    </div>
+                )
+            }
+        }
+
+        const root = document.getElementById('root')
+        ReactDOM.render(<HelloName name="sara" />,root)
+    </script>
+</body>
+
+</html>

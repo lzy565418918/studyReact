@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <style>
+        .p01 {
+            font-size: 30px;
+            color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        let str = '我是变量'
+
+        function reverse(val){
+            return val.split('').reverse().join('')
+        }
+
+        let num  =10
+        let isYes = false
+        let el = (
+            // jsx语法最外层只能有一个标签
+            <div>
+                {/* jsx里面的注释写法 */}
+                <p>Hello world!</p>
+                {/* 插入变量 */}
+                <p>{str}</p>
+                {/* 插入变量运算 */}
+                <p>{num+9}</p>
+                {/* 插入表达式 */}
+                <p>{reverse(str)}</p>
+                <p>{str.split('').reverse().join('')}</p>
+                <p>{isYes?'yes':'no'}</p>
+                <p>{num+10>19?'yes':'no'}</p>
+                {/* 使用class需要写成className */}
+                <p className="p01">使用class类的段落</p>
+                {/* 使用style需要携程对象的形式:
+                键可以不加引号，
+                值如果是数字可以不加引号，不是数字必须加引号
+                需要写成驼峰式 */}
+                <p style={{'backgroundColor':'red',width:'300px',height:100}}>使用style样式的段落</p>
+                {/* 单标签必须要/结尾 */}
+                <img style={{width:300}} src="./imgs/666.png" title="单片机"/>
+                <input type="button" value="按钮"/>
+            </div>
+        )
+
+            ReactDOM.render(
+                el,
+                document.getElementById('root')
+            )
+    </script>
+</body>
+
+</html>
