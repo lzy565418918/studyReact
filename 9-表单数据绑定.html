@@ -35,13 +35,13 @@
                 let {username,password}=this.state
                 return (
                     <form>
-                        <label>用户名：{username}<br/>
-                        { /* 提交表单数据的时候是以键值对提交的，键是name属性的值，值是value属性的值 */ }
-                        <input name="username" type="text" value={username} onChange={this.cg}/>  
-                        </label><br/>
-                        <label>密码：{password}<br/>
-                        <input name="password" type="password" value={password} onChange={this.cg}/>  
-                        </label>
+                        <p>用户名：{username}<br/>
+                            { /* 提交表单数据的时候是以键值对提交的，键是name属性的值，值是value属性的值 */ }
+                            <input name="username" type="text" value={username} onChange={this.cg}/>  
+                        </p>
+                        <p>密码：{password}<br/>
+                            <input name="password" type="password" value={password} onChange={this.cg}/>  
+                        </p>
                     </form>
                 )
             }
