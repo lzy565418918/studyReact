@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // // 无状态组件
+        // function LoginState(props){
+        //     if(props.isLogin==true){
+        //         return <h1>欢迎回来！</h1>
+        //     }else{
+        //         return <h1>请登录！</h1>
+        //     }
+        // }
+
+        function Login(){
+            return <h1>欢迎回来！</h1>
+        }
+
+        function Logout(){
+            return <h1>请登录！</h1>
+        }
+
+        function LoginState(props){
+            if(props.isLogin){
+                return <Login />
+            }else{
+                return <Logout />
+            }
+        }
+
+        class Notice extends React.Component{
+            constructor(props){
+                super(props)
+                this.state={
+                    username:'张三',
+                    msg:['1','2']
+                }
+            }
+            read=()=>{
+                this.setState(state=>({msg:[]}))
+            }
+            render(){
+                let {username,msg}=this.state
+                return (
+                    <div>
+                        <h1>欢迎你，{username}!</h1>
+                        {
+                            msg.length>0 && (
+                                <div>
+                                    <p>你有{msg.length}条消息</p>
+                                    <input type="button" value="点击全部已读" onClick={this.read}/>
+                                </div>
+                                
+                            )
+                        }  
+
+                    </div>
+                )
+            }
+        }
+        const root = document.getElementById('root')
+        ReactDOM.render(<Notice />,root)
+    </script>
+</body>
+
+</html>
