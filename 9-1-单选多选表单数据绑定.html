@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Myform extends React.Component{
+            constructor(props){
+                super(props)
+                this.state={
+                    hb:{
+                        'xx':'学习',
+                        'lq':'篮球',
+                        'mn':'美女',
+                        'dy':'电影',
+                        'pc':'跑车'
+                    },
+                    name:['xx','lq','mn','dy','pc'],
+                    namesec:['dy','pc']
+                }
+            }
+            sec=(e)=>{
+                console.log(e.target.value)
+                let value=e.target.value
+                // 判断点的框是否在已选数组里
+                if(this.state.namesec.includes(value)){
+                    // 如果已经选了，这时候点一下，应该从namesec数组里移除，并更新state数据
+                    var arr = this.state.namesec.filter(ele=>ele!=value)
+                }else{
+                    // 如果点的框不在已选数组里，则往已选数组namesec里加上点的这个，并更新state数据
+                    var arr = [...this.state.namesec,value]
+                }
+                this.setState(state=>({namesec: arr}))
+
+            }
+            render(){
+                let {hb,name,namesec}=this.state
+                return (
+                    <form>
+                        <p>爱好：{JSON.stringify(namesec)}</p>
+                        <br/>
+                        {
+                            name.map((item,index)=>{
+                                return (
+                                    <label key={index}>
+                                        <input 
+                                        type="checkbox" 
+                                        value={item} 
+                                        checked={namesec.includes(item)}
+                                        onChange={this.sec}/>
+                                        {hb[item]}
+                                    </label>)
+                                })
+                        }
+                    </form>
+                )
+            }
+        }
+        const root = document.getElementById('root')
+        ReactDOM.render(<Myform/>,root)
+    </script>
+</body>
+
+</html>
