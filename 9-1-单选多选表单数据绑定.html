@@ -27,7 +27,13 @@
                         'pc':'跑车'
                     },
                     name:['xx','lq','mn','dy','pc'],
-                    namesec:['dy','pc']
+                    namesec:[],
+                    sex: {
+                         'male':'男',
+                         'female':'女'
+                         },
+                    gender:['male','female'],
+                    gendersec:['male']
                 }
             }
             sec=(e)=>{
@@ -44,8 +50,13 @@
                 this.setState(state=>({namesec: arr}))
 
             }
+            changeSex=(e)=>{
+                this.setState({
+                    gendersec: [e.target.value]
+                })
+            }
             render(){
-                let {hb,name,namesec}=this.state
+                let {hb,name,namesec,sex,gender,gendersec}=this.state
                 return (
                     <form>
                         <p>爱好：{JSON.stringify(namesec)}</p>
@@ -55,13 +66,28 @@
                                 return (
                                     <label key={index}>
                                         <input 
-                                        type="checkbox" 
+                                        type="checkbox"
                                         value={item} 
                                         checked={namesec.includes(item)}
                                         onChange={this.sec}/>
                                         {hb[item]}
                                     </label>)
                                 })
+                        }
+                        <p>性别：{JSON.stringify(gendersec)}</p>
+                        {
+                            gender.map((item,index)=>{
+                                return (
+                                    <label key={index}>
+                                        <input
+                                        type="radio"
+                                        value={item}
+                                        checked={gendersec.includes(item)}
+                                        onChange={this.changeSex}
+                                        />{sex[item]}
+                                    </label>
+                                )
+                            })
                         }
                     </form>
                 )
