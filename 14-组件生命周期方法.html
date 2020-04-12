@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Son extends React.Component{
+            // 子组件发生变化后执行
+            componentWillReceiveProps(){
+                console.log('--componentWillReceiveProps方法子组件发生变化后执行--')
+            }
+            render(){
+                return (
+                    <h4>我是子组件，Hello,{this.props.name}</h4>
+                )
+            }
+        }
+        class Life extends React.Component{
+            constructor(){
+                super()
+                this.state = {
+                    num: 10,
+                    name: 'Jony'
+                }
+            }
+            fnChange=()=>{
+                this.setState({num: this.state.num+1})
+            }
+            // 组件挂载页面之前执行
+            componentWillMount(){
+                console.log('--componentWillMount方法组件挂载页面之前执行--')
+            }
+            // 组件挂载页面之后执行
+            componentDidMount(){
+                console.log('--componentDidMount方法组件挂载页面之后执行--')
+            }
+            // 组件更新之前执行，通过返回true or false 决定组件是否更新
+            shouldComponentUpdate(){
+                console.log('--shouldComponentUpdate方法通过返回true or false 决定组件是否更新--')
+                return true
+            }
+            // 组件更新之前执行，shouldComponentUpdate之后执行
+            componentWillUpdate(){
+                console.log('--componentWillUpdate方法组件更新之前执行--')
+            }
+            // 组件更新之后执行
+            componentDidUpdate(){
+                console.log('--componentDidUpdate方法组件更新之后执行--')
+            }
+            // 组件销毁之前执行
+            componentWillUnmount(){
+                console.log('--componentWillUnmount方法组件销毁之前执行--')
+            }
+            render(){
+                console.log('---render方法--')
+                return (
+                    <div>
+                        <h3>组件生命周期</h3>
+                        <p>num：{this.state.num}</p>
+                        <input type="button" value="更新num的值" onClick={this.fnChange}/>   
+                        <Son name={this.state.name}/> 
+                        <input type="button" value="更新子组件" onClick={()=>{this.setState({name: 'newJony'})}} />
+                    </div>
+                )
+            }
+        }
+        const root = document.getElementById('root')
+        // render方法接收两个参数，第一个参数可以是一个jsx对象，也可以是一个react组件
+        // 第二个参数是一个元素dom对象，它作为显示内容的容器
+        ReactDOM.render(<Life/>,root)
+        setTimeout(() => {
+            ReactDOM.render(<h1>已销毁</h1>,root)
+        }, 3000);
+    </script>
+</body>
+
+</html>
