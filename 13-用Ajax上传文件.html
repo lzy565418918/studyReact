@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Myform extends React.Component {
+        constructor() {
+          super();
+          this.myinp = React.createRef();
+          this.state = {
+            imgsrc: ''
+          }
+        }
+        getform = () => {
+            // 获取上传的文件
+          let resoure = this.myinp.current.files[0]
+        //   创建表单
+          let obj = new FormData()
+        //   把要上传的文件添加至表单中
+          obj.append('pic', resoure)
+        //   用过Ajax请求发送表单
+          axios.post('http://localhost:3000/upload',obj,{
+              'headers': {
+                //   文件的格式
+                  'content-type': 'multipart/form-data'
+              },
+              'responseType': 'text'
+          }).then(res=>{
+              console.log(res)
+              let filename = res.data
+              this.setState({imgsrc: `http://localhost:3000/${filename}`})
+          })
+        };
+        render() {
+          return (
+            <div>
+              <input type="file" name="pic" ref={this.myinp} />
+              <input type="button" value="上传图片" onClick={this.getform} />
+              <div>
+                {
+                    this.state.imgsrc&&<img src={this.state.imgsrc} alt="图片预览"/>
+                }
+              </div>
+            </div>
+          );
+        }
+      }
+      const root = document.getElementById("root");
+      // render方法接收两个参数，第一个参数可以是一个jsx对象，也可以是一个react组件
+      // 第二个参数是一个元素dom对象，它作为显示内容的容器
+      ReactDOM.render(<Myform />, root);
+    </script>
+</body>
+
+</html>
